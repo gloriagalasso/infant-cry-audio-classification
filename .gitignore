@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Data files (large audio and image files)
+data/donateacry_corpus/**/*.wav
+data/donateacry_corpus/**/*.png
+data/working/**/*.wav
+data/working/**/*.png
+data/working_2/**/*.wav
+data/working_2/**/*.png
+
+# Keep directory structure but ignore contents
+data/donateacry_corpus/**/
+data/working/**/
+data/working_2/**/
+
+# Models
+*.h5
+*.keras
+*.pkl
+*.joblib
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Environment variables
+.env
