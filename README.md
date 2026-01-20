@@ -73,7 +73,3 @@ When using these experiments in publications, cite the Donate-a-Cry corpus and t
 **License**
 
 See `LICENSE` for repository license terms.
-
-----
-
-If you would like, I can also generate a `requirements.txt` from the notebooks or commit this `README.md` change to a git branch—tell me which action you prefer next.
