@@ -20,6 +20,22 @@ This repository implements experiments for automatic classification of infant cr
 - **Modeling:** Example models use stacked `Conv1D` layers with Batch Normalization, pooling or GlobalAveragePooling, dropout, and a final dense softmax layer for five-class classification.
 - **Training:** Models are compiled with the Adam optimizer and categorical cross-entropy loss. Notebooks show training with a validation split and print test accuracy after evaluation.
 
+**Audio-to-Spectrogram Processing**
+
+- **Motivation:** Time-domain waveforms can be transformed into time–frequency representations that make spectral and temporal patterns explicit for convolutional and image-based models.
+- **Procedure:** Compute short-time Fourier transform (STFT) or mel-scaled spectrograms from raw audio (parameters: `n_fft`, `hop_length`, window length). Convert magnitude to a log-scale (e.g., dB) or use log-mel spectrograms to compress dynamic range and emphasize perceptually relevant bands.
+- **Shapes & sizing:** Spectrograms are resized, padded or cropped to a fixed time-frequency size so they can be consumed by 2D convolutional architectures or treated as channels for 1D/2D models.
+- **Variants:** Use linear-magnitude spectrograms, log-mel, or Mel-frequency cepstral representations depending on model choice. Time–frequency augmentation (see below) is often applied on spectrograms.
+
+**Data Augmentation**
+
+- **Purpose:** Augmentation increases effective dataset size, reduces overfitting, and exposes models to realistic acoustic variability.
+- **Common waveform-level augmentations:** additive background noise, random time-shifting (temporal translations), pitch shifting, time-stretching, random gain/amplitude scaling, and room impulse response (reverberation) simulation.
+- **Spectrogram-level augmentations:** frequency/time masking (SpecAugment), random cropping of time frames, and frequency warping. These augmentations are label-preserving and effective for time–frequency models.
+- **Mixing strategies:** `mixup` or audio-level mixing (overlaying two audio signals) can regularize training but require careful label handling (soft labels or proportional labels).
+- **Implementation choices:** Apply augmentations offline to expand the stored dataset or apply them on-the-fly during training (recommended for variety and storage efficiency). Ensure augmentation parameters maintain label validity (e.g., small pitch shifts that do not change the semantic label).
+- **Evaluation consideration:** When using augmentation, keep a clean validation/test set without augmentation to measure generalization to authentic recordings.
+
 **Repository Contents**
 
 - Notebooks:
@@ -69,7 +85,3 @@ This repository implements experiments for automatic classification of infant cr
 **Citation**
 
 When using these experiments in publications, cite the Donate-a-Cry corpus and the audio-processing and deep-learning methods employed (e.g., MFCC literature, convolutional models for sequential data).
-
-**License**
-
-See `LICENSE` for repository license terms.
